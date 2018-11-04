@@ -1,7 +1,8 @@
 var firstGuess = '';
 var secondGuess = '';
-var clickedCount = 0;
+var selectedCount = 0;
 var matchCount = 0;
+var clickCount = 0;
 var previousTarget = null;
 
 var resetDelayMillis = 1000;
@@ -11,6 +12,8 @@ var clickSound = new Audio("sound/click.wav");
 var matchSound = new Audio("sound/match.wav");
 var noMatchSound = new Audio("sound/no_match.wav");
 var victorySound = new Audio("sound/victory.wav");
+
+var startTimeMillis = 0;
 
 // Card data
 const cardsArray = [
@@ -87,17 +90,23 @@ grid.addEventListener('click', function (event) {
   // Do not allow the grid section itself to be selected; only select divs inside the grid.
   if (clicked.nodeName === 'SECTION' ||
      clicked === previousTarget ||
-     clicked.classList.contains('match')) {
+     clicked.classList.contains('match')||
+     clicked.parentNode.classList.contains('selected')) {
     return;
   }
   // Two cards are already selected.
-  if (clickedCount >= 2) {
+  if (selectedCount >= 2) {
     return;
   }
 
-  clickedCount++;
+  if (clickCount == 0) {
+    startTimeMillis = new Date().getTime();
+  }
+
+  selectedCount++;
+  clickCount++;
   clickSound.play();
-  if (clickedCount === 1) {
+  if (selectedCount === 1) {
     firstGuess = clicked.parentNode.dataset.name;
     console.log(firstGuess);
     clicked.parentNode.classList.add('selected');
@@ -128,7 +137,11 @@ const match = () => {
   matchCount++;
 
   if (matchCount == cardsArray.length) {
+    var timePassedMillis = new Date().getTime();
+    timePassedMillis -= startTimeMillis;
+    alert(timePassedMillis/1000 + " seconds");
     victorySound.play();
+    return;
   }
 }
 
@@ -138,7 +151,7 @@ const resetGuesses = () => {
   }
   firstGuess = '';
   secondGuess = '';
-  clickedCount = 0;
+  selectedCount = 0;
   previousTarget = null
 
   var selected = document.querySelectorAll('.selected');
