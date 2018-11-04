@@ -6,7 +6,7 @@
 
 body {
   margin: 2px 0;
-  background: #6589F9;
+  background-image: url("img/background.jpg");
 }
 
 .grid {
@@ -27,9 +27,18 @@ body {
 .card,
 .back,
 .front {
-  border-radius: 10px;
   height: 280px;
   width: 200px;
+}
+
+.card,
+.front {
+  border-radius: 13px;
+}
+
+.card,
+.back {
+  border-radius: 9px;
 }
 
 .back,
