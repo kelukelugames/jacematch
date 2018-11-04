@@ -21,7 +21,7 @@ const cardsArray = [
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
-  },/*
+  },
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
@@ -49,7 +49,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 const game = document.getElementById('game');
