@@ -21,7 +21,7 @@ const cardsArray = [
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
-  },/*
+  },
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
@@ -49,7 +49,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 const game = document.getElementById('game');
@@ -115,7 +115,6 @@ grid.addEventListener('click', function (event) {
     setTimeout(resetGuesses, resetDelayMillis);
     return;
   }
-  noMatchSound.play();
   setTimeout(resetGuesses, resetDelayMillis);
 });
 
@@ -134,6 +133,9 @@ const match = () => {
 }
 
 const resetGuesses = () => {
+  if (firstGuess !== secondGuess) {
+    noMatchSound.play();
+  }
   firstGuess = '';
   secondGuess = '';
   clickedCount = 0;
