@@ -73,6 +73,8 @@ let firstGuess = '';
 let secondGuess = '';
 let count = 0;
 let previousTarget = null;
+// delay of 1 second.
+let delayMillis = 1000;
 
 // Add event listener to grid
 grid.addEventListener('click', function (event) {
@@ -103,8 +105,10 @@ grid.addEventListener('click', function (event) {
 
       if (firstGuess === secondGuess) {
         match();
+        resetGuesses();
+      } else {
+        setTimeout(resetGuesses, delayMillis);
       }
-      resetGuesses(); 
     }
   }
  });
