@@ -53,19 +53,23 @@ let gameGrid = cardsArray.concat(cardsArray);
 gameGrid.sort(() => 0.5 - Math.random());
 
 gameGrid.forEach(item => {
-  // Create a div
+  // Create card element with the name dataset
   const card = document.createElement('div');
-
-  // Apply a card class to that div
   card.classList.add('card');
-
-  // Set the data-name attribute of the div to the cardsArray name
   card.dataset.name = item.name;
 
-  // Apply the background image of the div to the cardsArray image
-  card.style.backgroundImage = `url(${item.img})`;
+  // Create front of card
+  const front = document.createElement('div');
+  front.classList.add('front');
 
-  // Append the div to the grid section
+  // Create back of card, which contains 
+  const back = document.createElement('div');
+  back.classList.add('back');
+  back.style.backgroundImage = `url(${item.img})`;
+
+  // Append card to grid.
+  card.appendChild(front);
+  card.appendChild(back);
   grid.appendChild(card);
 });
 
@@ -81,7 +85,7 @@ grid.addEventListener('click', function (event) {
   // The event target is our clicked item
   let clicked = event.target;
 
-  // Do not allow the grid section itself to be selected; only select divs inside the grid
+  // Do not allow the grid section itself to be selected; only select divs inside the grid.
   if (clicked.nodeName === 'SECTION' || clicked === previousTarget) {
     return;
   }
@@ -89,29 +93,28 @@ grid.addEventListener('click', function (event) {
   if (count < 2) {
     count++;
     if (count === 1) {
-      // Assign first guess
-      firstGuess = clicked.dataset.name;
-      clicked.classList.add('selected');
+      firstGuess = clicked.parentNode.dataset.name;
+      console.log(firstGuess);
+      clicked.parentNode.classList.add('selected');
       // Set previous target to clicked  
       previousTarget = clicked;
     } else {
-      // Assign second guess
-      secondGuess = clicked.dataset.name;
-      clicked.classList.add('selected');
+      secondGuess = clicked.parentNode.dataset.name;
+      console.log(secondGuess);
+      clicked.parentNode.classList.add('selected');
     }
+
     // If both guesses are not empty...
     if (firstGuess !== '' && secondGuess !== '') {
       // and the first guess matches the second match...
 
       if (firstGuess === secondGuess) {
         match();
-        resetGuesses();
-      } else {
-        setTimeout(resetGuesses, delayMillis);
       }
+     setTimeout(resetGuesses, delayMillis);
     }
   }
- });
+});
 
 
 // Add match CSS
