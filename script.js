@@ -142,11 +142,13 @@ const match = () => {
 }
 
 function victory() {
-  var modal = document.getElementById('victoryModal');
+  var modal = document.getElementById('victorymodal');
   var timePassedMillis = new Date().getTime();
   timePassedMillis -= startTimeMillis;
-  console.log(timePassedMillis/1000 + " seconds");
   victorySound.play();
+  var text = document.getElementById('modaltext');
+  text.innerHTML += clickCount + " moves in ";
+  text.innerHTML += timePassedMillis/1000 + " seconds";
   modal.style.display = "block";
 }
 
