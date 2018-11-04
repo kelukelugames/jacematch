@@ -1,11 +1,11 @@
-let firstGuess = '';
-let secondGuess = '';
-let clickedCount = 0;
-let matchCount = 0;
-let previousTarget = null;
+var firstGuess = '';
+var secondGuess = '';
+var clickedCount = 0;
+var matchCount = 0;
+var previousTarget = null;
 
-let resetDelayMillis = 1000;
-let matchDelayMillis = 200;
+var resetDelayMillis = 1000;
+var matchDelayMillis = 200;
 
 // Card data
 const cardsArray = [
@@ -71,7 +71,6 @@ gameGrid.forEach(item => {
   back.classList.add('back');
   back.style.backgroundImage = `url(${item.img})`;
 
-  // Append card to grid.
   card.appendChild(front);
   card.appendChild(back);
   grid.appendChild(card);
