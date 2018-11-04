@@ -18,7 +18,7 @@ body {
 }
 
 .card {
-  border-radius: 6px;
+  border-radius: 8px;
   margin: 2px;
   background-color: #6589F9;
   background-size: contain;
@@ -26,4 +26,14 @@ body {
   background-position: center center;
   height: 280px;
   width: 200px;
+}
+
+.selected {
+  -webkit-filter: brightness(150%); /* Safari */
+  filter: brightness(150%);
+}
+
+.match {
+  -webkit-filter: brightness(70%); /* Safari */
+  filter: brightness(70%);
 }
