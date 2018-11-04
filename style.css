@@ -27,7 +27,7 @@ body {
 .card,
 .back,
 .front {
-  border-radius: 8px;
+  border-radius: 10px;
   height: 280px;
   width: 200px;
 }
