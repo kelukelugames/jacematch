@@ -20,7 +20,7 @@ const cardsArray = [
   {
     'name': 'jace_beleren',
     'img': 'img/jace_beleren.jpeg',
-  },
+  },/*
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
@@ -52,7 +52,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },
+  },*/
 ];
 
 const memoryGame = document.getElementById('memorygame');
@@ -137,12 +137,17 @@ const match = () => {
   matchCount++;
 
   if (matchCount == cardsArray.length) {
-    var timePassedMillis = new Date().getTime();
-    timePassedMillis -= startTimeMillis;
-    console.log(timePassedMillis/1000 + " seconds");
-    victorySound.play();
-    return;
+    victory();
   }
+}
+
+function victory() {
+  var modal = document.getElementById('victoryModal');
+  var timePassedMillis = new Date().getTime();
+  timePassedMillis -= startTimeMillis;
+  console.log(timePassedMillis/1000 + " seconds");
+  victorySound.play();
+  modal.style.display = "block";
 }
 
 const resetGuesses = () => {
