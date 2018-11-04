@@ -27,7 +27,7 @@ body {
 .card,
 .back,
 .front {
-  border-radius: 8px;
+  border-radius: 10px;
   height: 280px;
   width: 200px;
 }
@@ -39,7 +39,7 @@ body {
 }
 
 .front {
-  background: #FAB942 url('img/back.jpg') no-repeat center center / contain;
+  background: url('img/back.jpg') no-repeat center center / contain;
 }
 
 .back {

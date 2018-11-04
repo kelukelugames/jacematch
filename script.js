@@ -10,7 +10,7 @@ const cardsArray = [{
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
-  },/*
+  },
   {
     'name': 'jace_ingenious_mind_mage',
     'img': 'img/jace_ingenious_mind_mage.jpeg',
@@ -34,7 +34,7 @@ const cardsArray = [{
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 // Grab the div with an id of root
