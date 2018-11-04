@@ -1,3 +1,15 @@
+
+let firstGuess = '';
+let secondGuess = '';
+let clickedCount = 0;
+let previousTarget = null;
+
+let resetDelayMillis = 1000;
+let matchDelayMillis = 200;
+
+let moveCount = 0;
+let matchCount = 0;
+
 // Card data
 const cardsArray = [{
     'name': 'jace_beleren',
@@ -10,7 +22,7 @@ const cardsArray = [{
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
-  },/*
+  },
   {
     'name': 'jace_ingenious_mind_mage',
     'img': 'img/jace_ingenious_mind_mage.jpeg',
@@ -34,7 +46,7 @@ const cardsArray = [{
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 // Grab the div with an id of root
@@ -73,13 +85,6 @@ gameGrid.forEach(item => {
   grid.appendChild(card);
 });
 
-let firstGuess = '';
-let secondGuess = '';
-let count = 0;
-let previousTarget = null;
-
-let resetDelayMillis = 1000;
-let matchDelayMillis = 200;
 
 // Add event listener to grid
 grid.addEventListener('click', function (event) {
@@ -93,11 +98,12 @@ grid.addEventListener('click', function (event) {
     return;
   }
   // Two cards are already selected.
-  if (count >= 2) {
+  if (clickedCount >= 2) {
     return;
   }
 
-  count++;
+  clickedCount++;
+  moveCount++;
   if (count === 1) {
     firstGuess = clicked.parentNode.dataset.name;
     console.log(firstGuess);
@@ -124,6 +130,7 @@ grid.addEventListener('click', function (event) {
 // Add match CSS
 const match = () => {
   var selected = document.querySelectorAll('.selected');
+  matchCount++;
   selected.forEach(card => {
     card.classList.add('match');
   });
@@ -132,7 +139,7 @@ const match = () => {
 const resetGuesses = () => {
   firstGuess = '';
   secondGuess = '';
-  count = 0;
+  clickedCount = 0;
   previousTarget = null
 
   var selected = document.querySelectorAll('.selected');
