@@ -39,7 +39,7 @@ body {
 }
 
 .front {
-  background: #FAB942 url('img/back.jpg') no-repeat center center / contain;
+  background: url('img/back.jpg') no-repeat center center / contain;
 }
 
 .back {
