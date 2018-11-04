@@ -10,7 +10,7 @@ const cardsArray = [{
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
-  },
+  },/*
   {
     'name': 'jace_ingenious_mind_mage',
     'img': 'img/jace_ingenious_mind_mage.jpeg',
@@ -34,7 +34,7 @@ const cardsArray = [{
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },
+  },*/
 ];
 
 // Grab the div with an id of root
@@ -77,8 +77,9 @@ let firstGuess = '';
 let secondGuess = '';
 let count = 0;
 let previousTarget = null;
-// delay of 1 second.
-let delayMillis = 1000;
+
+let resetDelayMillis = 1000;
+let matchDelayMillis = 200;
 
 // Add event listener to grid
 grid.addEventListener('click', function (event) {
@@ -89,31 +90,32 @@ grid.addEventListener('click', function (event) {
   if (clicked.nodeName === 'SECTION' || clicked === previousTarget) {
     return;
   }
-
-  if (count < 2) {
-    count++;
-    if (count === 1) {
-      firstGuess = clicked.parentNode.dataset.name;
-      console.log(firstGuess);
-      clicked.parentNode.classList.add('selected');
-      // Set previous target to clicked  
-      previousTarget = clicked;
-    } else {
-      secondGuess = clicked.parentNode.dataset.name;
-      console.log(secondGuess);
-      clicked.parentNode.classList.add('selected');
-    }
-
-    // If both guesses are not empty...
-    if (firstGuess !== '' && secondGuess !== '') {
-      // and the first guess matches the second match...
-
-      if (firstGuess === secondGuess) {
-        match();
-      }
-     setTimeout(resetGuesses, delayMillis);
-    }
+  // Two cards are already selected.
+  if (count >= 2) {
+    return;
   }
+
+  count++;
+  if (count === 1) {
+    firstGuess = clicked.parentNode.dataset.name;
+    console.log(firstGuess);
+    clicked.parentNode.classList.add('selected');
+    // Set previous target to clicked.
+    previousTarget = clicked;
+    return;
+  }
+
+  secondGuess = clicked.parentNode.dataset.name;
+  console.log(secondGuess);
+  clicked.parentNode.classList.add('selected');
+
+  if (firstGuess === secondGuess) {
+    setTimeout(match, matchDelayMillis);
+    // check victory condition here.
+    setTimeout(resetGuesses, resetDelayMillis - matchDelayMillis);
+    return;
+  }
+  setTimeout(resetGuesses, resetDelayMillis);
 });
 
 
