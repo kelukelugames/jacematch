@@ -90,6 +90,8 @@ grid.addEventListener('click', function (event) {
       // Assign first guess
       firstGuess = clicked.dataset.name;
       clicked.classList.add('selected');
+      // Set previous target to clicked  
+      previousTarget = clicked;
     } else {
       // Assign second guess
       secondGuess = clicked.dataset.name;
@@ -101,13 +103,9 @@ grid.addEventListener('click', function (event) {
 
       if (firstGuess === secondGuess) {
         match();
-        resetGuesses(); 
-      } else {
-        resetGuesses();
-      }  
+      }
+      resetGuesses(); 
     }
-    // Set previous target to clicked  
-    previousTarget = clicked;
   }
  });
 
@@ -124,6 +122,7 @@ const resetGuesses = () => {
   firstGuess = '';
   secondGuess = '';
   count = 0;
+  previousTarget = null
 
   var selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
