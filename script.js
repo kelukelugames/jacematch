@@ -87,7 +87,9 @@ grid.addEventListener('click', function (event) {
   let clicked = event.target;
 
   // Do not allow the grid section itself to be selected; only select divs inside the grid.
-  if (clicked.nodeName === 'SECTION' || clicked === previousTarget) {
+  if (clicked.nodeName === 'SECTION' ||
+     clicked === previousTarget ||
+     clicked.classList.contains('match')) {
     return;
   }
   // Two cards are already selected.
