@@ -139,7 +139,7 @@ const match = () => {
   if (matchCount == cardsArray.length) {
     var timePassedMillis = new Date().getTime();
     timePassedMillis -= startTimeMillis;
-    alert(timePassedMillis/1000 + " seconds");
+    console.log(timePassedMillis/1000 + " seconds");
     victorySound.play();
     return;
   }
