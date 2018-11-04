@@ -1,12 +1,27 @@
+var firstGuess = '';
+var secondGuess = '';
+var clickedCount = 0;
+var matchCount = 0;
+var previousTarget = null;
+
+var resetDelayMillis = 1000;
+var matchDelayMillis = 200;
+
+var clickSound = new Audio("sound/click.wav");
+var matchSound = new Audio("sound/match.wav");
+var noMatchSound = new Audio("sound/no_match.wav");
+var victorySound = new Audio("sound/victory.wav");
+
 // Card data
-const cardsArray = [{
+const cardsArray = [
+  {
     'name': 'jace_beleren',
     'img': 'img/jace_beleren.jpeg',
   },
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
-  },
+  },/*
   {
     'name': 'jace_cunning_castaway',
     'img': 'img/jace_cunning_castaway.jpeg',
@@ -34,56 +49,39 @@ const cardsArray = [{
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },
+  },*/
 ];
 
-// Grab the div with an id of root
 const game = document.getElementById('game');
 
-// Create a section with a class of grid
 const grid = document.createElement('section');
 grid.setAttribute('class', 'grid');
 
-// Append the grid section to the game div
 game.appendChild(grid);
 
 let gameGrid = cardsArray.concat(cardsArray);
 
-// Randomize game grid on each load
+// Randomize game grid on each load.
 gameGrid.sort(() => 0.5 - Math.random());
 
 gameGrid.forEach(item => {
-  // Create card element with the name dataset
   const card = document.createElement('div');
   card.classList.add('card');
   card.dataset.name = item.name;
 
-  // Create front of card
   const front = document.createElement('div');
   front.classList.add('front');
 
-  // Create back of card, which contains 
   const back = document.createElement('div');
   back.classList.add('back');
   back.style.backgroundImage = `url(${item.img})`;
 
-  // Append card to grid.
   card.appendChild(front);
   card.appendChild(back);
   grid.appendChild(card);
 });
 
-let firstGuess = '';
-let secondGuess = '';
-let count = 0;
-let previousTarget = null;
-
-let resetDelayMillis = 1000;
-let matchDelayMillis = 200;
-
-// Add event listener to grid
 grid.addEventListener('click', function (event) {
-  // The event target is our clicked item
   let clicked = event.target;
 
   // Do not allow the grid section itself to be selected; only select divs inside the grid.
@@ -93,12 +91,13 @@ grid.addEventListener('click', function (event) {
     return;
   }
   // Two cards are already selected.
-  if (count >= 2) {
+  if (clickedCount >= 2) {
     return;
   }
 
-  count++;
-  if (count === 1) {
+  clickedCount++;
+  clickSound.play();
+  if (clickedCount === 1) {
     firstGuess = clicked.parentNode.dataset.name;
     console.log(firstGuess);
     clicked.parentNode.classList.add('selected');
@@ -113,26 +112,31 @@ grid.addEventListener('click', function (event) {
 
   if (firstGuess === secondGuess) {
     setTimeout(match, matchDelayMillis);
-    // check victory condition here.
-    setTimeout(resetGuesses, resetDelayMillis - matchDelayMillis);
+    setTimeout(resetGuesses, resetDelayMillis);
     return;
   }
+  noMatchSound.play();
   setTimeout(resetGuesses, resetDelayMillis);
 });
 
 
-// Add match CSS
 const match = () => {
+  matchSound.play();
   var selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
     card.classList.add('match');
   });
+  matchCount++;
+
+  if (matchCount == cardsArray.length) {
+    victorySound.play();
+  }
 }
 
 const resetGuesses = () => {
   firstGuess = '';
   secondGuess = '';
-  count = 0;
+  clickedCount = 0;
   previousTarget = null
 
   var selected = document.querySelectorAll('.selected');
