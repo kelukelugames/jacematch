@@ -1,15 +1,3 @@
-
-let firstGuess = '';
-let secondGuess = '';
-let clickedCount = 0;
-let previousTarget = null;
-
-let resetDelayMillis = 1000;
-let matchDelayMillis = 200;
-
-let moveCount = 0;
-let matchCount = 0;
-
 // Card data
 const cardsArray = [{
     'name': 'jace_beleren',
@@ -85,6 +73,13 @@ gameGrid.forEach(item => {
   grid.appendChild(card);
 });
 
+let firstGuess = '';
+let secondGuess = '';
+let count = 0;
+let previousTarget = null;
+
+let resetDelayMillis = 1000;
+let matchDelayMillis = 200;
 
 // Add event listener to grid
 grid.addEventListener('click', function (event) {
@@ -98,12 +93,11 @@ grid.addEventListener('click', function (event) {
     return;
   }
   // Two cards are already selected.
-  if (clickedCount >= 2) {
+  if (count >= 2) {
     return;
   }
 
-  clickedCount++;
-  moveCount++;
+  count++;
   if (count === 1) {
     firstGuess = clicked.parentNode.dataset.name;
     console.log(firstGuess);
@@ -130,7 +124,6 @@ grid.addEventListener('click', function (event) {
 // Add match CSS
 const match = () => {
   var selected = document.querySelectorAll('.selected');
-  matchCount++;
   selected.forEach(card => {
     card.classList.add('match');
   });
@@ -139,7 +132,7 @@ const match = () => {
 const resetGuesses = () => {
   firstGuess = '';
   secondGuess = '';
-  clickedCount = 0;
+  count = 0;
   previousTarget = null
 
   var selected = document.querySelectorAll('.selected');
