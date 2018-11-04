@@ -7,6 +7,11 @@ var previousTarget = null;
 var resetDelayMillis = 1000;
 var matchDelayMillis = 200;
 
+var clickSound = new Audio("sound/click.wav");
+var matchSound = new Audio("sound/match.wav");
+var noMatchSound = new Audio("sound/no_match.wav");
+var victorySound = new Audio("sound/victory.wav");
+
 // Card data
 const cardsArray = [
   {
@@ -91,6 +96,7 @@ grid.addEventListener('click', function (event) {
   }
 
   clickedCount++;
+  clickSound.play();
   if (clickedCount === 1) {
     firstGuess = clicked.parentNode.dataset.name;
     console.log(firstGuess);
@@ -109,20 +115,22 @@ grid.addEventListener('click', function (event) {
     setTimeout(resetGuesses, resetDelayMillis);
     return;
   }
+  noMatchSound.play();
   setTimeout(resetGuesses, resetDelayMillis);
 });
 
 
 const match = () => {
+  matchSound.play();
   var selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
     card.classList.add('match');
   });
   matchCount++;
 
-    if (matchCount == cardsArray.length) {
-      alert("victory");
-    }
+  if (matchCount == cardsArray.length) {
+    victorySound.play();
+  }
 }
 
 const resetGuesses = () => {
