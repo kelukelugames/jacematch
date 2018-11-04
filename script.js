@@ -52,16 +52,16 @@ const cardsArray = [
   },
 ];
 
-const game = document.getElementById('game');
+const memoryGame = document.getElementById('memorygame');
 
 const grid = document.createElement('section');
 grid.setAttribute('class', 'grid');
 
-game.appendChild(grid);
+memoryGame.appendChild(grid);
 
 let gameGrid = cardsArray.concat(cardsArray);
 
-// Randomize game grid on each load.
+// Randomize gameGrid on each load.
 gameGrid.sort(() => 0.5 - Math.random());
 
 gameGrid.forEach(item => {
