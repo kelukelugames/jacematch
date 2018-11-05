@@ -157,13 +157,31 @@ function showVictoryModal() {
 
 
   var img = document.getElementById('modalimg');
-  img.innerHTML += "<img src='" + getVictoryImgSrc() + "'>";
+  img.innerHTML += "<img src='" + getVictoryImgSrc(timePassedMillis/1000) + "'>";
 
   modal.style.display = "block";
 }
 
-function getVictoryImgSrc() {
-  return "img/jace_unraveler_of_secrets.jpeg"
+function getVictoryImgSrc(seconds) {
+  if (seconds < 35) {
+    return "img/hornet_queen.jpeg"
+  }
+  if (seconds < 40) {
+    return "img/enthralling_victor.jpeg"
+  }
+  if (seconds < 45) {
+    return "img/speedway_fanatic.jpeg"
+  }
+  if (seconds < 50) {
+    return "img/hill_giant.jpeg"
+  }
+  if (seconds < 60) {
+    return "img/boros_recruit.jpeg"
+  }
+  if (seconds < 90) {
+    return "img/inexorable_blob.jpeg"
+  }
+  return "img/thing_in_the_ice.jpeg"
 }
 
 const resetGuesses = () => {
