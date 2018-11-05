@@ -112,8 +112,18 @@ body {
 
 }
 
+.modal-buttons {
+  text-align: center;
+  margin: 20px;
+}
+
 /* Add Animation */
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 20%; opacity: 1}
+}
+
+.fontawesome {
+  margin: 10px;
+  color: white;
 }
