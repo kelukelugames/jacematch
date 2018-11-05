@@ -21,7 +21,7 @@ const cardsArray = [
   {
     'name': 'jace_beleren',
     'img': 'img/jace_beleren.jpeg',
-  },/*
+  },
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
@@ -53,7 +53,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 const memoryGame = document.getElementById('memorygame');
@@ -163,13 +163,13 @@ function showVictoryModal() {
 }
 
 function getVictoryImgSrc(seconds) {
-  if (seconds < 35) {
+  if (seconds < 30) {
     return "img/hornet_queen.jpeg"
   }
-  if (seconds < 40) {
+  if (seconds < 35) {
     return "img/enthralling_victor.jpeg"
   }
-  if (seconds < 45) {
+  if (seconds < 40) {
     return "img/speedway_fanatic.jpeg"
   }
   if (seconds < 50) {
