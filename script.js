@@ -14,13 +14,14 @@ var noMatchSound = new Audio("sound/no_match.wav");
 var victorySound = new Audio("sound/victory.wav");
 
 var startTimeMillis = 0;
+var timePassedMillis = 0;
 
 // Card data
 const cardsArray = [
   {
     'name': 'jace_beleren',
     'img': 'img/jace_beleren.jpeg',
-  },
+  },/*
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
@@ -52,7 +53,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },
+  },*/
 ];
 
 const memoryGame = document.getElementById('memorygame');
@@ -137,12 +138,32 @@ const match = () => {
   matchCount++;
 
   if (matchCount == cardsArray.length) {
-    var timePassedMillis = new Date().getTime();
-    timePassedMillis -= startTimeMillis;
-    alert(timePassedMillis/1000 + " seconds");
-    victorySound.play();
-    return;
+    victory();
   }
+}
+
+function victory() {
+  timePassedMillis = new Date().getTime();
+  timePassedMillis -= startTimeMillis;
+  victorySound.play();
+  showVictoryModal();
+}
+
+function showVictoryModal() {
+  var modal = document.getElementById('victorymodal');
+  var text = document.getElementById('modaltext');
+  text.innerHTML += clickCount + " moves in ";
+  text.innerHTML += timePassedMillis/1000 + " seconds.";
+
+
+  var img = document.getElementById('modalimg');
+  img.innerHTML += "<img src='" + getVictoryImgSrc() + "'>";
+
+  modal.style.display = "block";
+}
+
+function getVictoryImgSrc() {
+  return "img/jace_unraveler_of_secrets.jpeg"
 }
 
 const resetGuesses = () => {
