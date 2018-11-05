@@ -112,6 +112,10 @@ body {
 
 }
 
+img {
+  border-radius: 9px;
+}
+
 .modal-buttons {
   text-align: center;
   margin: 20px;
