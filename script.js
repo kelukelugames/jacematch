@@ -21,7 +21,7 @@ const cardsArray = [
   {
     'name': 'jace_beleren',
     'img': 'img/jace_beleren.jpeg',
-  },/*
+  },
   {
     'name': 'jace_architect_of_thought',
     'img': 'img/jace_architect_of_thought.jpeg',
@@ -53,7 +53,7 @@ const cardsArray = [
   {
     'name': 'jace_unraveler_of_secrets',
     'img': 'img/jace_unraveler_of_secrets.jpeg',
-  },*/
+  },
 ];
 
 const memoryGame = document.getElementById('memorygame');
